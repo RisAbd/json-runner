@@ -1,8 +1,15 @@
 (function() {
     const print = console.log;
 
+    const controlsForm = document.querySelector('#controls');
+    const playButton = controlsForm.querySelector('button[name=play]');
+    const stopButton = controlsForm.querySelector('button[name=stop]');
+    const jsonUrlSourceInput = controlsForm.querySelector('input[name=url]');
+
+    const levelContainer = document.querySelector('.level-container');
+    const levelEl = levelContainer.querySelector('.level');
+
     const levelText = document.getElementById('level');
-    const playButton = document.getElementById('play');
     const windowElement = document.querySelector('.window');
 
     const playerElement = document.getElementById('player');
@@ -10,7 +17,7 @@
     const birdElement = document.getElementById('bird');
 
     const bird = {
-        name: 'Воробей'
+        name: 'Воробей',
     };
 
     function setupBird() {
@@ -29,9 +36,13 @@
     setupBird();
 
     const game = {
-        isPlaying: true,
+        isPlaying: false,
         playState: null,
-        gravity: 109.8,  // (':
+        gravity: 609.8,  // (':
+        MAX_VELOCITY: {
+            vertical: 300,
+            horizontal: 300,
+        }
     };
 
     const player = {
@@ -44,8 +55,8 @@
         location: {
             x: 70, y: 40,
         },
-        horizontalVelocity: 100,
-        jumpVelocity: -255,
+        horizontalVelocity: 50,
+        jumpVelocity: 200,
         name: 'Sergey',
         _element: playerElement,
         _titleElement: playerElement.querySelector('.name'),
@@ -72,10 +83,11 @@
             this._prevHorizontalMovementType = value === 0 ? null : type;
         },
         jump: function() {
-            this.velocity.y = this.jumpVelocity;
+            this.velocity.y = (this.velocity.y > 0 ? -this.jumpVelocity : this.velocity.y - this.jumpVelocity);
+            this.velocity.y = Math.min(game.MAX_VELOCITY.vertical, Math.max(-game.MAX_VELOCITY.vertical, this.velocity.y));
         },
         unjump: function() {
-            this.velocity.y -= this.jumpVelocity * 0.3;
+            this.velocity.y = this.jumpVelocity * 0.3;
         },
         _move: function({ timeFraction }) {
             const { x: vx, y: vy } = this.velocity;
@@ -85,80 +97,56 @@
             this.location = { x: x + vx * timeFraction, y: y + vy * timeFraction };
             this.velocity = { x: vx + timeFraction * ax, y: vy + timeFraction * ay };
 
-            requestAnimationFrame(this._boundReposition);
+            requestAnimationFrame(this._reposition);
         },
         _reposition: function() {
-            // print(this);
             const { x, y } = this.location;
             this._element.style.left = `${x}px`;
             this._element.style.top = `${y}px`;
         },
-        _boundReposition: undefined,
         setup: function() {
             this._titleElement.innerHTML = this.name;
+            this._reposition = this._reposition.bind(this);
             this._reposition();
-            this._boundReposition = this._reposition.bind(this);
         },
     };
 
     player.setup();
 
-    // const clip = function(el, from, to) {
-    //   var range = document.createRange();
-    //   range.setStart(el.firstChild, from);
-    //   range.setEnd(el.firstChild, to);
-    //   // range.selectNodeContents(el);
-    //   var sel = window.getSelection();
-    //   sel.removeAllRanges();
-    //   sel.addRange(range);
-    //   return range;
-    // };
-
     function togglePlayButton(isPlaying) {
         if (isPlaying) {
             playButton.innerText = 'Pause';
-            playButton.style.backgroundColor = 'gray';
+            playButton.dataset.pause = true;
         } else {
-            playButton.innerText = 'Play';
-            playButton.style.backgroundColor = 'green';
+            playButton.innerText = 'Resume';
+            playButton.dataset.pause = false;
         }
     }
 
-    togglePlayButton(game.isPlaying);
 
+    function play(opts = {}) {
 
-    function play({el = levelText.firstChild, pEl = levelText, range, length, start = 0, offset = 1, chars = 300, tick = 23} = {}) {
-
-        if (!range) {
-            range = document.createRange();
-        }
-
-        if (!length) {
-            length = el.length;
-        }
+        const {length, range = document.createRange(), elementFromIndex = () => levelEl, start = 0, offset = 1, chars = 300, tick = 23} = opts;
 
         const end = Math.min(start+chars, length);
 
-        range.setStart(el, start);
-        range.setEnd(el, end);
+        range.setStart(...elementFromIndex(start));
+        range.setEnd(...elementFromIndex(end));
 
         var sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
 
         if (end === length) {
+            game.isPlaying = false;
             return;
         }
 
         if (game.isPlaying) {
-            windowElement.scrollLeft = start * 0.7;
+            windowElement.scrollLeft = start * 0.6;
         }
 
-        start = game.isPlaying ? start+offset : start;
-
-        s = {el, pEl, range, length, start: start, offset, chars, tick}
-
-        setTimeout(play, tick, s);
+        setTimeout(play, tick, Object.assign({}, opts, {start: (game.isPlaying ? start+offset : start)}));
     }
 
     playButton.addEventListener('click', e => {
@@ -166,71 +154,73 @@
         togglePlayButton(game.isPlaying);
     });
 
-    const onPlayerKeyDown = e => {
+    const keyMem = {up: false};
+
+    const onPlayerKeyEvent = action => e => {
         const { keyCode } = e;
-        const step = 15;
         switch (keyCode) {
             case 38: // up
-                player.jump();
+                if (action == 'up') {
+                    keyMem.up = false;
+                } else if (action == 'down' && !keyMem.up) {
+                    keyMem.up = true;
+                    player.jump();
+                }
                 break;
             case 39: // right
-                player.setHorizontalMovement('right');
+                player.setHorizontalMovement('right', action === 'down' ? undefined : 0);
                 break;
             case 40: // down
-                player.unjump();
+                if (action == 'down') {
+                    player.unjump();
+                }
                 break;
             case 37: // left
-                player.setHorizontalMovement('left');
+                player.setHorizontalMovement('left', action === 'down' ? undefined : 0);
                 break;
             default:
                 return;
         }
     };
 
-    const onPlayerKeyUp = e => {
-        const { keyCode } = e;
-        const step = 15;
-        switch (keyCode) {
-            case 38: // up
-                break;
-            case 39: // right
-                player.setHorizontalMovement('right', 0);
-                break;
-            case 40: // down
-                break;
-            case 37: // left
-                player.setHorizontalMovement('left', 0);
-                break;
-            default:
-                return;
-        }
-    };
-
-    document.addEventListener('keydown', onPlayerKeyDown);
-    document.addEventListener('keyup', onPlayerKeyUp)
+    document.addEventListener('keydown', onPlayerKeyEvent('down'));
+    document.addEventListener('keyup', onPlayerKeyEvent('up'));
 
     const startPlayerPositionTimer = ({ prevTs = performance.now(), tick = 16 } = {}) => {
-
         const ts = performance.now();
+        const scheduleNextFrame = () => setTimeout(startPlayerPositionTimer, tick, {player, game, prevTs: ts, tick});
+        if (!game.isPlaying) { 
+            return scheduleNextFrame();
+        }
 
         const timeFraction = (ts - prevTs) / 1000;
 
         player._move({ timeFraction });
-        // print(player.location);
 
-        const s = { player, game, prevTs: ts, tick };
-
-        setTimeout(startPlayerPositionTimer, tick, s);
+        scheduleNextFrame();
     };
 
     startPlayerPositionTimer();
 
     async function loadLevel() {
-        const level = await fetch('level1.json').then(r => r.text());
+        const level = await fetch(jsonUrlSourceInput.value)
+            .then(r => r.text());
 
-        levelText.innerHTML = level;
+        const levelIndex = [];  // items are (textNode, charIndex)
+        level.split('\n').forEach((ch, i) => {
+            const lineEl = document.createElement('span');
+            lineEl.innerText = ch;
+            lineEl.classList.toggle('level-line');
+            const textNode = lineEl.firstChild;
+            levelIndex.push(...ch.split('').map((_, i) => [textNode, i]));
+            levelEl.append(lineEl);
+        })
 
-        play();
+        // levelText.innerHTML = level;
+
+        play({length: levelIndex.length, elementFromIndex: i => levelIndex[i]});
+
+        playButton.focus();
     }
 
     loadLevel();
