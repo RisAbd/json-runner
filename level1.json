@@ -1,0 +1,383 @@
+00.000.[Message]: {
+00.001.  "type": "_SELF",
+01.002.  "user": 3
+01.003.}
+01.004.[Message]: {
+01.005.  "type": "_CONNECT",
+02.006.  "user": 3,
+02.007.  "scopes": [
+02.008.    "passenger",
+02.009.    "all",
+03.010.    "user"
+03.011.  ]
+03.012.}
+03.013.[Error]: [object CustomEvent]
+04.014.[Message]: {
+04.015.  "type": "_NOT_CONNECTED",
+04.016.  "user": 4
+04.017.}
+05.018.[Message]: {
+05.019.  "type": "ACCEPT",
+05.020.  "payload": {
+05.021.    "_name": "ACCEPT",
+06.022.    "id": 444,
+06.023.    "type": 4,
+06.024.    "details": {
+07.025.      "accept_seconds": 5.799801
+07.026.    },
+07.027.    "time": "1538569308",
+07.028.    "passenger": 3,
+08.029.    "driver": 6,
+08.030.    "passenger_lat": null,
+08.031.    "passenger_lng": null,
+08.032.    "driver_lat": null,
+09.033.    "driver_lng": null,
+09.034.    "initiated_by": "driver"
+09.035.  },
+09.036.  "scope": "all",
+10.037.  "server_time": 1538569308.841853
+10.038.}
+10.039.[Message]: {
+10.040.  "type": "_CONNECT",
+11.041.  "user": 4,
+11.042.  "scopes": [
+11.043.    "driver",
+11.044.    "all"
+12.045.  ]
+12.046.}
+12.047.[Message]: {
+13.048.  "type": "DRIVER_PING",
+13.049.  "payload": {
+13.050.    "lat": 0,
+13.051.    "lng": 0,
+14.052.    "distance": 1234,
+14.053.    "charge": 30,
+14.054.    "tariff": {
+14.055.      "type": "ECONOM",
+15.056.      "waiting": 3,
+15.057.      "base": 50,
+15.058.      "free_waiting": 10,
+15.059.      "km": 12,
+16.060.      "min": 0,
+16.061.      "default_charge": 100,
+16.062.      "currency": "KGS",
+16.063.      "available_charges": [
+17.064.        0,
+17.065.        20,
+17.066.        30,
+17.067.        50,
+18.068.        100
+18.069.      ]
+18.070.    },
+19.071.    "data": {
+19.072.      "distance": 1234,
+19.073.      "waiting": 0,
+19.074.      "duration": 0
+20.075.    },
+20.076.    "amount": {
+20.077.      "base": 0,
+20.078.      "charge": 30,
+21.079.      "km": 14.808,
+21.080.      "min": 0,
+21.081.      "waiting": 0,
+21.082.      "total": 44.808
+22.083.    }
+22.084.  },
+22.085.  "scope": "all",
+22.086.  "server_time": 1538569311.7382712
+23.087.}
+23.088.[Message]: {
+23.089.  "type": "USER_PING",
+23.090.  "payload": {
+24.091.    "lat": 0,
+24.092.    "lng": 0,
+24.093.    "tariff": {
+25.094.      "type": "ECONOM",
+25.095.      "waiting": 3,
+25.096.      "base": 50,
+25.097.      "free_waiting": 10,
+26.098.      "km": 12,
+26.099.      "min": 0,
+26.100.      "default_charge": 100,
+26.101.      "currency": "KGS",
+27.102.      "available_charges": [
+27.103.        0,
+27.104.        20,
+27.105.        30,
+28.106.        50,
+28.107.        100
+28.108.      ]
+28.109.    },
+29.110.    "data": {
+29.111.      "distance": 1234,
+29.112.      "waiting": 0,
+30.113.      "duration": 0
+30.114.    },
+30.115.    "amount": {
+30.116.      "base": 0,
+31.117.      "charge": 30,
+31.118.      "km": 14.808,
+31.119.      "min": 0,
+31.120.      "waiting": 0,
+32.121.      "total": 44.808
+32.122.    }
+32.123.  },
+32.124.  "scope": "all",
+33.125.  "server_time": 1538569315.0424159
+33.126.}
+33.127.[Message]: {
+33.128.  "type": "DRIVER_PING",
+34.129.  "payload": {
+34.130.    "lat": 0,
+34.131.    "lng": 0,
+34.132.    "distance": 1234,
+35.133.    "charge": 30,
+35.134.    "tariff": {
+35.135.      "type": "ECONOM",
+36.136.      "waiting": 3,
+36.137.      "base": 50,
+36.138.      "free_waiting": 10,
+36.139.      "km": 12,
+37.140.      "min": 0,
+37.141.      "default_charge": 100,
+37.142.      "currency": "KGS",
+37.143.      "available_charges": [
+38.144.        0,
+38.145.        20,
+38.146.        30,
+38.147.        50,
+39.148.        100
+39.149.      ]
+39.150.    },
+39.151.    "data": {
+40.152.      "distance": 1234,
+40.153.      "waiting": 0,
+40.154.      "duration": 0
+40.155.    },
+41.156.    "amount": {
+41.157.      "base": 0,
+41.158.      "charge": 30,
+42.159.      "km": 14.808,
+42.160.      "min": 0,
+42.161.      "waiting": 0,
+42.162.      "total": 44.808
+43.163.    }
+43.164.  },
+43.165.  "scope": "all",
+43.166.  "server_time": 1538570907.063461
+44.167.}
+44.168.[Message]: {
+44.169.  "type": "USER_PING",
+44.170.  "payload": {
+45.171.    "lat": 0,
+45.172.    "lng": 0,
+45.173.    "tariff": {
+45.174.      "type": "ECONOM",
+46.175.      "waiting": 3,
+46.176.      "base": 50,
+46.177.      "free_waiting": 10,
+46.178.      "km": 12,
+47.179.      "min": 0,
+47.180.      "default_charge": 100,
+47.181.      "currency": "KGS",
+48.182.      "available_charges": [
+48.183.        0,
+48.184.        20,
+48.185.        30,
+49.186.        50,
+49.187.        100
+49.188.      ]
+49.189.    },
+50.190.    "data": {
+50.191.      "distance": 1234,
+50.192.      "waiting": 0,
+50.193.      "duration": 0
+51.194.    },
+51.195.    "amount": {
+51.196.      "base": 0,
+51.197.      "charge": 30,
+52.198.      "km": 14.808,
+52.199.      "min": 0,
+52.200.      "waiting": 0,
+52.201.      "total": 44.808
+53.202.    }
+53.203.  },
+53.204.  "scope": "all",
+54.205.  "server_time": 1538570909.0290377
+54.206.}
+54.207.[Message]: {
+54.208.  "type": "_DISCONNECT",
+55.209.  "user": 4,
+55.210.  "scopes": [
+55.211.    "driver",
+55.212.    "all"
+56.213.  ]
+56.214.}
+56.215.[Message]: {
+56.216.  "type": "_CONNECT",
+57.217.  "user": 4,
+57.218.  "scopes": [
+57.219.    "driver",
+57.220.    "all"
+58.221.  ]
+58.222.}
+58.223.[Message]: {
+58.224.  "type": "ARRIVE",
+59.225.  "payload": {
+59.226.    "_name": "ARRIVE",
+59.227.    "id": 445,
+60.228.    "type": 6,
+60.229.    "details": {},
+60.230.    "time": "1538570932",
+60.231.    "passenger": 3,
+61.232.    "driver": 6,
+61.233.    "passenger_lat": 0,
+61.234.    "passenger_lng": 0,
+61.235.    "driver_lat": 0,
+62.236.    "driver_lng": 0,
+62.237.    "initiated_by": "driver"
+62.238.  },
+62.239.  "scope": "all",
+63.240.  "server_time": 1538570932.9228103
+63.241.}
+63.242.[Message]: {
+63.243.  "type": "START",
+64.244.  "payload": {
+64.245.    "_name": "START",
+64.246.    "id": 446,
+64.247.    "type": 8,
+65.248.    "details": {},
+65.249.    "time": "1538570933",
+65.250.    "passenger": 3,
+66.251.    "driver": 6,
+66.252.    "passenger_lat": 0,
+66.253.    "passenger_lng": 0,
+66.254.    "driver_lat": 0,
+67.255.    "driver_lng": 0,
+67.256.    "initiated_by": "driver"
+67.257.  },
+67.258.  "scope": "all",
+68.259.  "server_time": 1538570933.9075172
+68.260.}
+68.261.[Message]: {
+68.262.  "type": "PAUSE",
+69.263.  "payload": {
+69.264.    "_name": "PAUSE",
+69.265.    "id": 447,
+69.266.    "type": 9,
+70.267.    "details": {},
+70.268.    "time": "1538570934",
+70.269.    "passenger": 3,
+70.270.    "driver": 6,
+71.271.    "passenger_lat": 0,
+71.272.    "passenger_lng": 0,
+71.273.    "driver_lat": 0,
+72.274.    "driver_lng": 0,
+72.275.    "initiated_by": "driver"
+72.276.  },
+72.277.  "scope": "all",
+73.278.  "server_time": 1538570934.983996
+73.279.}
+73.280.[Message]: {
+73.281.  "type": "RESUME",
+74.282.  "payload": {
+74.283.    "_name": "RESUME",
+74.284.    "id": 448,
+74.285.    "type": 10,
+75.286.    "details": {
+75.287.      "wait_duration": 0,
+75.288.      "wait_duration_chunk": 0.5245051383972168
+75.289.    },
+76.290.    "time": "1538570935",
+76.291.    "passenger": 3,
+76.292.    "driver": 6,
+77.293.    "passenger_lat": 0,
+77.294.    "passenger_lng": 0,
+77.295.    "driver_lat": 0,
+77.296.    "driver_lng": 0,
+78.297.    "initiated_by": "driver"
+78.298.  },
+78.299.  "scope": "all",
+78.300.  "server_time": 1538570935.5042098
+79.301.}
+79.302.[Message]: {
+79.303.  "type": "PAUSE",
+79.304.  "payload": {
+80.305.    "_name": "PAUSE",
+80.306.    "id": 449,
+80.307.    "type": 9,
+80.308.    "details": {},
+81.309.    "time": "1538570937",
+81.310.    "passenger": 3,
+81.311.    "driver": 6,
+81.312.    "passenger_lat": 0,
+82.313.    "passenger_lng": 0,
+82.314.    "driver_lat": 0,
+82.315.    "driver_lng": 0,
+83.316.    "initiated_by": "driver"
+83.317.  },
+83.318.  "scope": "all",
+83.319.  "server_time": 1538570937.913857
+84.320.}
+84.321.[Message]: {
+84.322.  "type": "RESUME",
+84.323.  "payload": {
+85.324.    "_name": "RESUME",
+85.325.    "id": 450,
+85.326.    "type": 10,
+85.327.    "details": {
+86.328.      "wait_duration": 0.5245051383972168,
+86.329.      "wait_duration_chunk": 1.0043315887451172
+86.330.    },
+86.331.    "time": "1538570938",
+87.332.    "passenger": 3,
+87.333.    "driver": 6,
+87.334.    "passenger_lat": 0,
+87.335.    "passenger_lng": 0,
+88.336.    "driver_lat": 0,
+88.337.    "driver_lng": 0,
+88.338.    "initiated_by": "driver"
+89.339.  },
+89.340.  "scope": "all",
+89.341.  "server_time": 1538570938.928782
+89.342.}
+90.343.[Message]: {
+90.344.  "type": "FINISH",
+90.345.  "payload": {
+90.346.    "_name": "FINISH",
+91.347.    "id": 451,
+91.348.    "type": 11,
+91.349.    "details": {},
+91.350.    "time": "1538570940",
+92.351.    "passenger": 3,
+92.352.    "driver": 6,
+92.353.    "passenger_lat": 0,
+92.354.    "passenger_lng": 0,
+93.355.    "driver_lat": 0,
+93.356.    "driver_lng": 0,
+93.357.    "initiated_by": "driver"
+93.358.  },
+94.359.  "scope": "all",
+94.360.  "server_time": 1538570940.489209
+94.361.}
+95.362.[Message]: {
+95.363.  "type": "RATE",
+95.364.  "payload": {
+95.365.    "_name": "RATE",
+96.366.    "id": 453,
+96.367.    "type": 13,
+96.368.    "details": {
+96.369.      "review_id": 48
+97.370.    },
+97.371.    "time": "1538570946",
+97.372.    "passenger": 3,
+97.373.    "driver": 6,
+98.374.    "passenger_lat": null,
+98.375.    "passenger_lng": null,
+98.376.    "driver_lat": null,
+98.377.    "driver_lng": null,
+99.378.    "initiated_by": "user"
+99.379.  },
+99.380.  "scope": "passenger|manager",
+99.381.  "server_time": 1538570946.2564452
+100.382.}
