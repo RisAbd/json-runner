@@ -16,24 +16,22 @@
 
     const birdElement = document.getElementById('bird');
 
-    const bird = {
-        name: 'Воробей',
-    };
-
-    function setupBird() {
-        birdElement.querySelector('.name').innerHTML = bird.name;
-        let isLettingBirdFly = true;
+    function Bird({el, name = 'Воробей'}) {
+        this.name = name;
+        el.querySelector('.name').innerHTML = this.name;
+        this.isFlying = true;
         const repositionBird = (x, y) => {
-            birdElement.style.left = `${x}px`;
-            birdElement.style.top = `${y}px`;
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
         };
-        windowElement.addEventListener('click', function(e) { isLettingBirdFly = !isLettingBirdFly; repositionBird(e.pageX, e.pageY); });
-        windowElement.addEventListener('mousemove', function(e) {
-            if (!isLettingBirdFly) { return; }
+        windowElement.addEventListener('click', (e) => { this.isFlying = !this.isFlying; repositionBird(e.pageX, e.pageY); });
+        windowElement.addEventListener('mousemove', (e) => {
+            if (!this.isFlying) { return; }
             repositionBird(e.pageX, e.pageY);
         });
     }
-    setupBird();
+
+    const bird = new Bird({el: birdElement, name: 'Borobey'});
 
     const game = {
         isPlaying: false,
